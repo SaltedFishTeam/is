@@ -50,6 +50,19 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.42</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
+       
+		<!-- 为了监控数据库 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.25</version>
+		</dependency>
+		 <!-- 重构bean的toString -->
+        <dependency>
+		    <groupId>org.lucee</groupId>
+		    <artifactId>commons-lang</artifactId>
+		    <version>2.6.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

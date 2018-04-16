@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
   
 
-Hi JSP. 现在时间是  ${now}
+Hi JSP. 现在时间是  
