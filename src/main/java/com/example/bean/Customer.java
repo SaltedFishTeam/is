@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.bean;
 
 import javax.persistence.Entity;
 
