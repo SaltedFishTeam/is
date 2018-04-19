@@ -19,7 +19,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
-	
+	//测试
 	
 	public CustomerService getCustomerService() {
 		return customerService;
@@ -32,8 +32,7 @@ public class CustomerController {
 	}
 
 
-
-	@RequestMapping("/add")
+	@RequestMapping("add")
 	public String index(Model m) {
 		Customer customer = new Customer(-1,"java进阶篇",10);
 		Customer add = customerService.add(customer);
