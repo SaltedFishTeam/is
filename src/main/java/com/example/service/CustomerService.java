@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.bean.Customer;
-import com.example.bean.CustomerRepository;
+import com.example.entity.Customer;
+import com.example.entity.CustomerRepository;
 
 @Service
 public class CustomerService {

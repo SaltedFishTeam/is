@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.bean.Customer;
-import com.example.bean.CustomerRepository;
+import com.example.entity.Customer;
+import com.example.entity.CustomerRepository;
 import com.example.service.CustomerService;
 
 @Controller

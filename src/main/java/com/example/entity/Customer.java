@@ -1,4 +1,4 @@
-package com.example.bean;
+package com.example.entity;
 
 import javax.annotation.Generated;
 import javax.persistence.Entity;
