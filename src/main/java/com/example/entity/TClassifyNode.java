@@ -7,11 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TClassifyNode entity. @author MyEclipse Persistence Tools
@@ -51,6 +55,7 @@ public class TClassifyNode implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "classify_notes_id", unique = true, nullable = false)
 	public Long getClassifyNotesId() {
 		return this.classifyNotesId;
@@ -88,4 +93,12 @@ public class TClassifyNode implements java.io.Serializable {
 		this.TNodes = TNodes;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
+
+	
+	
 }

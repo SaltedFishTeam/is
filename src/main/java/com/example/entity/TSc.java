@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * TSc entity. @author MyEclipse Persistence Tools
  */
@@ -113,5 +115,9 @@ public class TSc implements java.io.Serializable {
 	public void setSpeakTime(Integer speakTime) {
 		this.speakTime = speakTime;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -7,11 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TCourse entity. @author MyEclipse Persistence Tools
@@ -78,6 +82,7 @@ public class TCourse implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "course_id", unique = true, nullable = false)
 	public Long getCourseId() {
 		return this.courseId;
@@ -204,5 +209,9 @@ public class TCourse implements java.io.Serializable {
 	public void setTHomeworks(Set<THomework> THomeworks) {
 		this.THomeworks = THomeworks;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

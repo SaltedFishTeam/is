@@ -7,9 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TUser entity. @author MyEclipse Persistence Tools
@@ -115,6 +119,7 @@ public class TUser implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "uid", unique = true, nullable = false)
 	public Long getUid() {
 		return this.uid;
@@ -375,5 +380,9 @@ public class TUser implements java.io.Serializable {
 	public void setTCoursecomments(Set<TCoursecomment> TCoursecomments) {
 		this.TCoursecomments = TCoursecomments;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

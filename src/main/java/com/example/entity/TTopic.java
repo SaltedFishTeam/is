@@ -7,11 +7,15 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TTopic entity. @author MyEclipse Persistence Tools
@@ -59,6 +63,7 @@ public class TTopic implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "topic_id", unique = true, nullable = false)
 	public Long getTopicId() {
 		return this.topicId;
@@ -122,5 +127,9 @@ public class TTopic implements java.io.Serializable {
 	public void setTTopicmessages(Set<TTopicmessage> TTopicmessages) {
 		this.TTopicmessages = TTopicmessages;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

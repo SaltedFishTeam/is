@@ -4,10 +4,14 @@ package com.example.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TCoursecomment entity. @author MyEclipse Persistence Tools
@@ -57,6 +61,7 @@ public class TCoursecomment implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "courseComment_id", unique = true, nullable = false)
 	public Long getCourseCommentId() {
 		return this.courseCommentId;
@@ -121,5 +126,9 @@ public class TCoursecomment implements java.io.Serializable {
 	public void setCourseStarLevel(Float courseStarLevel) {
 		this.courseStarLevel = courseStarLevel;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

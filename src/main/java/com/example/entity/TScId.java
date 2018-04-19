@@ -4,6 +4,8 @@ package com.example.entity;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * TScId entity. @author MyEclipse Persistence Tools
  */
@@ -74,5 +76,9 @@ public class TScId implements java.io.Serializable {
 				+ (getCourseId() == null ? 0 : this.getCourseId().hashCode());
 		return result;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

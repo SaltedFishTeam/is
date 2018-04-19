@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * TTestQuestion entity. @author MyEclipse Persistence Tools
  */
@@ -87,5 +89,9 @@ public class TTestQuestion implements java.io.Serializable {
 	public void setUseTime(Float useTime) {
 		this.useTime = useTime;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -4,10 +4,14 @@ package com.example.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TNode entity. @author MyEclipse Persistence Tools
@@ -55,6 +59,7 @@ public class TNode implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "node_id", unique = true, nullable = false)
 	public Long getNodeId() {
 		return this.nodeId;
@@ -118,5 +123,9 @@ public class TNode implements java.io.Serializable {
 	public void setSkimNum(Long skimNum) {
 		this.skimNum = skimNum;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

@@ -4,10 +4,14 @@ package com.example.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * TMessage entity. @author MyEclipse Persistence Tools
@@ -54,6 +58,7 @@ public class TMessage implements java.io.Serializable {
 
 	// Property accessors
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "message_id", unique = true, nullable = false)
 	public Long getMessageId() {
 		return this.messageId;
@@ -109,5 +114,9 @@ public class TMessage implements java.io.Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
