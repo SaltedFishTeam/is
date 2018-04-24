@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.is.entity.Customer;
+<<<<<<< HEAD
 import com.is.entity.CustomerRepository;
+=======
+import com.is.repository.CustomerRepository;
 
 @Service
 public class CustomerService {

@@ -23,9 +23,46 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public Optional<TUser> query(int uid){
-		return userRepository.findById(uid);
+	public List<TUser> query(int uid){
+		return userRepository.findAll();
 		
 	}
 	
+	public TUser findByAccount(String account) {
+		return userRepository.findByAccount(account);
+	}
+	
+	public boolean register(TUser user) {
+		if(findByAccount(user.getAccount()) != null) {
+			return false;
+		} else {
+			try{
+				userRepository.save(user);	
+			}catch (Exception e) {
+				return false;
+			}
+			return true;
+		}
+	}
+	
+	public TUser login(TUser user){
+		TUser findUser = findByAccount(user.getAccount());
+		//账号不存在
+		if(findUser == null){
+			//账号不存在
+			return null;
+			//烟瘴账号
+		}else if(findUser.getAccount() .equals(user.getAccount())){
+			//验证密码
+			if(findUser.getPwd().equals(user.getPwd())) {
+				//登陆成功
+				return findUser;
+			} else {
+				//密码错误登陆失败
+				return null;
+			}
+			
+		}  
+		return null;
+	}
 }
