@@ -78,9 +78,5 @@ public class TStudentworkId implements java.io.Serializable {
 						.hashCode());
 		return result;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

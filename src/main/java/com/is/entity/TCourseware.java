@@ -98,9 +98,5 @@ public class TCourseware implements java.io.Serializable {
 	public void setCoursewareName(String coursewareName) {
 		this.coursewareName = coursewareName;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

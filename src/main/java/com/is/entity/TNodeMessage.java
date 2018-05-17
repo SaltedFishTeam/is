@@ -86,9 +86,5 @@ public class TNodeMessage implements java.io.Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

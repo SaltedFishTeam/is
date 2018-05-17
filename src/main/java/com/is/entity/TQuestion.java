@@ -124,9 +124,5 @@ public class TQuestion implements java.io.Serializable {
 	public void setTotalTime(Double totalTime) {
 		this.totalTime = totalTime;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

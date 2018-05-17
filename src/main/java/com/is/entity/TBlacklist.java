@@ -75,9 +75,5 @@ public class TBlacklist implements java.io.Serializable {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

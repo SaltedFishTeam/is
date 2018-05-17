@@ -109,9 +109,5 @@ public class TPlan implements java.io.Serializable {
 	public void setStatuc(Boolean statuc) {
 		this.statuc = statuc;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

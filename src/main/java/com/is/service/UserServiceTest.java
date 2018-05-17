@@ -19,9 +19,9 @@ public class UserServiceTest {
 
 	@Test
 	public void test() {
-		System.out.println("测试");
-		TUser fndByAccount = userService.findByAccount("0154025");
-		System.out.println(fndByAccount);
+//		System.out.println("测试");
+//		TUser fndByAccount = userService.findByAccount("0154025");
+//		System.out.println(fndByAccount);
 	}
 	
 }

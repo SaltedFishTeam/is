@@ -114,9 +114,5 @@ public class TStudentwork implements java.io.Serializable {
 	public void setGrade(Float grade) {
 		this.grade = grade;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+
 }

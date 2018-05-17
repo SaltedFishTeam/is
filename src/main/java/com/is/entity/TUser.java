@@ -20,7 +20,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "t_user", catalog = "is")
-public class TUser implements java.io.Serializable {
+public class TUser {
 
 	// Fields
 
@@ -33,9 +33,11 @@ public class TUser implements java.io.Serializable {
 	private Double credit;
 	private String intro;
 	private String friends;
+	private String addr;
+	private String sex;
+	private String style;
 	private Set<TMessage> TMessagesForSendId = new HashSet<TMessage>(0);
 	private Set<TTopicreply> TTopicreplies = new HashSet<TTopicreply>(0);
-	private Set<TTeacher> TTeachers = new HashSet<TTeacher>(0);
 	private Set<TTopic> TTopics = new HashSet<TTopic>(0);
 	private Set<TClassifyNode> TClassifyNodes = new HashSet<TClassifyNode>(0);
 	private Set<TNodeMessage> TNodeMessages = new HashSet<TNodeMessage>(0);
@@ -47,12 +49,13 @@ public class TUser implements java.io.Serializable {
 	private Set<TTest> TTests = new HashSet<TTest>(0);
 	private Set<TSearch> TSearchs = new HashSet<TSearch>(0);
 	private Set<TBlacklist> TBlacklists = new HashSet<TBlacklist>(0);
-	private Set<TStudent> TStudents = new HashSet<TStudent>(0);
 	private Set<TMessage> TMessagesForReceiveId = new HashSet<TMessage>(0);
 	private Set<TActionMessage> TActionMessages = new HashSet<TActionMessage>(0);
 	private Set<TTopicmessage> TTopicmessages = new HashSet<TTopicmessage>(0);
 	private Set<TAction> TActions = new HashSet<TAction>(0);
 	private Set<TCoursecomment> TCoursecomments = new HashSet<TCoursecomment>(0);
+	private Set<TCourse> TCourses = new HashSet<TCourse>(0);
+
 
 	// Constructors
 
@@ -76,13 +79,13 @@ public class TUser implements java.io.Serializable {
 	public TUser(Integer uid, String username, String account, String pwd,
 			String phone, Integer role, Double credit, String intro,
 			String friends, Set<TMessage> TMessagesForSendId,
-			Set<TTopicreply> TTopicreplies, Set<TTeacher> TTeachers,
+			Set<TTopicreply> TTopicreplies,
 			Set<TTopic> TTopics, Set<TClassifyNode> TClassifyNodes,
 			Set<TNodeMessage> TNodeMessages, Set<TActionReply> TActionReplies,
 			Set<TStudentwork> TStudentworks, Set<TPlan> TPlans, Set<TSc> TScs,
 			Set<TQuestion> TQuestions, Set<TTest> TTests,
 			Set<TSearch> TSearchs, Set<TBlacklist> TBlacklists,
-			Set<TStudent> TStudents, Set<TMessage> TMessagesForReceiveId,
+			Set<TMessage> TMessagesForReceiveId,
 			Set<TActionMessage> TActionMessages,
 			Set<TTopicmessage> TTopicmessages, Set<TAction> TActions,
 			Set<TCoursecomment> TCoursecomments) {
@@ -97,7 +100,6 @@ public class TUser implements java.io.Serializable {
 		this.friends = friends;
 		this.TMessagesForSendId = TMessagesForSendId;
 		this.TTopicreplies = TTopicreplies;
-		this.TTeachers = TTeachers;
 		this.TTopics = TTopics;
 		this.TClassifyNodes = TClassifyNodes;
 		this.TNodeMessages = TNodeMessages;
@@ -109,7 +111,6 @@ public class TUser implements java.io.Serializable {
 		this.TTests = TTests;
 		this.TSearchs = TSearchs;
 		this.TBlacklists = TBlacklists;
-		this.TStudents = TStudents;
 		this.TMessagesForReceiveId = TMessagesForReceiveId;
 		this.TActionMessages = TActionMessages;
 		this.TTopicmessages = TTopicmessages;
@@ -125,8 +126,45 @@ public class TUser implements java.io.Serializable {
 		return this.uid;
 	}
 
+	@Column(name = "style", nullable = true, length = 200)
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUser")
+	public Set<TCourse> getTCourses() {
+		return TCourses;
+	}
+
+	public void setTCourses(Set<TCourse> tCourses) {
+		TCourses = tCourses;
+	}
+
 	public void setUid(Integer uid) {
 		this.uid = uid;
+	}
+
+	@Column(name = "addr", nullable = false, length = 100)
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	@Column(name = "sex", nullable = false, length = 20)
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	@Column(name = "username", nullable = false, length = 100)
@@ -174,7 +212,7 @@ public class TUser implements java.io.Serializable {
 		this.role = role;
 	}
 
-	@Column(name = "credit", nullable = false, precision = 22, scale = 0)
+	@Column(name = "credit",columnDefinition="double default 0")
 	public Double getCredit() {
 		return this.credit;
 	}
@@ -217,15 +255,6 @@ public class TUser implements java.io.Serializable {
 
 	public void setTTopicreplies(Set<TTopicreply> TTopicreplies) {
 		this.TTopicreplies = TTopicreplies;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUser")
-	public Set<TTeacher> getTTeachers() {
-		return this.TTeachers;
-	}
-
-	public void setTTeachers(Set<TTeacher> TTeachers) {
-		this.TTeachers = TTeachers;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUser")
@@ -327,15 +356,6 @@ public class TUser implements java.io.Serializable {
 		this.TBlacklists = TBlacklists;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUser")
-	public Set<TStudent> getTStudents() {
-		return this.TStudents;
-	}
-
-	public void setTStudents(Set<TStudent> TStudents) {
-		this.TStudents = TStudents;
-	}
-
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUserByReceiveId")
 	public Set<TMessage> getTMessagesForReceiveId() {
 		return this.TMessagesForReceiveId;
@@ -380,9 +400,5 @@ public class TUser implements java.io.Serializable {
 	public void setTCoursecomments(Set<TCoursecomment> TCoursecomments) {
 		this.TCoursecomments = TCoursecomments;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

@@ -102,9 +102,4 @@ public class TChapter implements java.io.Serializable {
 	public void setTSections(Set<TSection> TSections) {
 		this.TSections = TSections;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
 }

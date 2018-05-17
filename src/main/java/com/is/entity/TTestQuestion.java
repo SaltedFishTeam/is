@@ -89,9 +89,5 @@ public class TTestQuestion implements java.io.Serializable {
 	public void setUseTime(Float useTime) {
 		this.useTime = useTime;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

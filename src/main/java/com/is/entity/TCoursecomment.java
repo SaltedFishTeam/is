@@ -126,9 +126,5 @@ public class TCoursecomment implements java.io.Serializable {
 	public void setCourseStarLevel(Float courseStarLevel) {
 		this.courseStarLevel = courseStarLevel;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

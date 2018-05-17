@@ -127,9 +127,5 @@ public class TTopicmessage implements java.io.Serializable {
 	public void setTTopicreplies(Set<TTopicreply> TTopicreplies) {
 		this.TTopicreplies = TTopicreplies;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+
 }

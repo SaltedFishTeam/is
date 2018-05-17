@@ -1,4 +1,4 @@
-package com.is.jsonbean;
+package com.is.json.status;
 
 public class Status {
 	
@@ -45,10 +45,10 @@ public class Status {
 		this.msg = msg;
 	}
 
-	public Status(String status, int code2, String msg) {
+	public Status(String status, int code, String msg) {
 		super();
 		this.status = status;
-		this.code = code2;
+		this.code = code;
 		this.msg = msg;
 	}
 	

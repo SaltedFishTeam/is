@@ -103,9 +103,5 @@ public class TTest implements java.io.Serializable {
 	public void setTTestQuestions(Set<TTestQuestion> TTestQuestions) {
 		this.TTestQuestions = TTestQuestions;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

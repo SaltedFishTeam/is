@@ -76,9 +76,5 @@ public class TScId implements java.io.Serializable {
 				+ (getCourseId() == null ? 0 : this.getCourseId().hashCode());
 		return result;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

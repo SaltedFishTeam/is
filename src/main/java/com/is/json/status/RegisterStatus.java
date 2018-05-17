@@ -1,6 +1,6 @@
-package com.is.jsonbean;
+package com.is.json.status;
 
-public class LoginStatus extends Status {
+public class RegisterStatus extends Status {
 	
 	private Integer uid;
 	private String username;
@@ -59,19 +59,8 @@ public class LoginStatus extends Status {
 	public void setFriends(String friends) {
 		this.friends = friends;
 	}
-	public LoginStatus(String status, int code, String msg, Integer uid, String username, String account,
-			String phone, Integer role, Double credit, String intro, String friends) {
+	public RegisterStatus(String status, int code, String msg) {
 		super(status, code, msg);
-		this.uid = uid;
-		this.username = username;
-		this.account = account;
-		this.phone = phone;
-		this.role = role;
-		this.credit = credit;
-		this.intro = intro;
-		this.friends = friends;
 	}
-	
-	
 	
 }

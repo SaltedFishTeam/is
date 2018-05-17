@@ -28,6 +28,7 @@ public class TMessage implements java.io.Serializable {
 	private String sendTime;
 	private String message;
 	private Boolean status;
+	private Integer type;
 
 	// Constructors
 
@@ -37,23 +38,27 @@ public class TMessage implements java.io.Serializable {
 
 	/** minimal constructor */
 	public TMessage(Integer messageId, TUser TUserByReceiveId,
-			TUser TUserBySendId, String message, Boolean status) {
+			TUser TUserBySendId, String message, Boolean status,
+			Integer type) {
 		this.messageId = messageId;
 		this.TUserByReceiveId = TUserByReceiveId;
 		this.TUserBySendId = TUserBySendId;
 		this.message = message;
 		this.status = status;
+		this.type = type;
 	}
 
 	/** full constructor */
 	public TMessage(Integer messageId, TUser TUserByReceiveId,
-			TUser TUserBySendId, String sendTime, String message, Boolean status) {
+			TUser TUserBySendId, String sendTime, String message, Boolean status,
+			Integer type) {
 		this.messageId = messageId;
 		this.TUserByReceiveId = TUserByReceiveId;
 		this.TUserBySendId = TUserBySendId;
 		this.sendTime = sendTime;
 		this.message = message;
 		this.status = status;
+		this.type = type;
 	}
 
 	// Property accessors
@@ -114,9 +119,13 @@ public class TMessage implements java.io.Serializable {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
+	@Column(name = "type", nullable = false)
+	public Integer getType() {
+		return type;
 	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
 }

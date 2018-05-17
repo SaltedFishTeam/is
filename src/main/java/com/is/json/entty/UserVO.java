@@ -1,16 +1,40 @@
-package com.is.jsonbean;
+package com.is.json.entty;
 
-public class RegisterStatus extends Status {
+/**
+ * 
+ * 时间 2018年5月13日 上午12:06:43 
+ * 早点睡觉，晚安
+ * by wcm
+ * 
+ * 类注释
+ * 课程详情信息展示教师VO类
+ * 用于转化为json字符串传给前端
+ */
+public class UserVO {
 	
 	private Integer uid;
 	private String username;
 	private String account;
-	private String phone;
 	private Integer role;
 	private Double credit;
 	private String intro;
+	private String addr;
+	private String sex;
+	private String style;
+	private String phone;
 	private String friends;
-	
+	public String getFriends() {
+		return friends;
+	}
+	public void setFriends(String friends) {
+		this.friends = friends;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public Integer getUid() {
 		return uid;
 	}
@@ -28,12 +52,6 @@ public class RegisterStatus extends Status {
 	}
 	public void setAccount(String account) {
 		this.account = account;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 	public Integer getRole() {
 		return role;
@@ -53,23 +71,22 @@ public class RegisterStatus extends Status {
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	public String getFriends() {
-		return friends;
+	public String getAddr() {
+		return addr;
 	}
-	public void setFriends(String friends) {
-		this.friends = friends;
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
-	public RegisterStatus(String status, int code, String msg, Integer uid, String username, String account,
-			String phone, Integer role, Double credit, String intro, String friends) {
-		super(status, code, msg);
-		this.uid = uid;
-		this.username = username;
-		this.account = account;
-		this.phone = phone;
-		this.role = role;
-		this.credit = credit;
-		this.intro = intro;
-		this.friends = friends;
+	public String getSex() {
+		return sex;
 	}
-	
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
 }

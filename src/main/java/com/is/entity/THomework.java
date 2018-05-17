@@ -152,9 +152,5 @@ public class THomework implements java.io.Serializable {
 	public void setTStudentworks(Set<TStudentwork> TStudentworks) {
 		this.TStudentworks = TStudentworks;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

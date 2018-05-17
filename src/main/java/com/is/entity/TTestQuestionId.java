@@ -77,9 +77,5 @@ public class TTestQuestionId implements java.io.Serializable {
 				+ (getTestId() == null ? 0 : this.getTestId().hashCode());
 		return result;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

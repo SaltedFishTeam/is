@@ -27,7 +27,7 @@ public class TCourse implements java.io.Serializable {
 	// Fields
 
 	private Integer courseId;
-	private TTeacher TTeacher;
+	private TUser tUser;
 	private String courseName;
 	private String courseIntro;
 	private Float courseStarLevel;
@@ -36,6 +36,8 @@ public class TCourse implements java.io.Serializable {
 	private String courseType;
 	private String courseLive;
 	private Boolean courseStatus;
+	private String courseImg;
+	private int studentNum;
 	private Set<TSc> TScs = new HashSet<TSc>(0);
 	private Set<TChapter> TChapters = new HashSet<TChapter>(0);
 	private Set<TCoursecomment> TCoursecomments = new HashSet<TCoursecomment>(0);
@@ -48,24 +50,25 @@ public class TCourse implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public TCourse(Integer courseId, TTeacher TTeacher, String courseName,
-			Float courseStarLevel, Float courseDiffLevel, Boolean courseStatus) {
+	public TCourse(Integer courseId, TUser tUser, String courseName,
+			Float courseStarLevel, Float courseDiffLevel, Boolean courseStatus,String courseImg) {
 		this.courseId = courseId;
-		this.TTeacher = TTeacher;
+		this.tUser = tUser;
 		this.courseName = courseName;
 		this.courseStarLevel = courseStarLevel;
 		this.courseDiffLevel = courseDiffLevel;
 		this.courseStatus = courseStatus;
+		this.courseImg = courseImg;
 	}
 
 	/** full constructor */
-	public TCourse(Integer courseId, TTeacher TTeacher, String courseName,
+	public TCourse(Integer courseId, TUser tUser, String courseName,
 			String courseIntro, Float courseStarLevel, Float courseDiffLevel,
 			String courseLabel, String courseType, String courseLive,
 			Boolean courseStatus, Set<TSc> TScs, Set<TChapter> TChapters,
 			Set<TCoursecomment> TCoursecomments, Set<THomework> THomeworks) {
 		this.courseId = courseId;
-		this.TTeacher = TTeacher;
+		this.tUser = tUser;
 		this.courseName = courseName;
 		this.courseIntro = courseIntro;
 		this.courseStarLevel = courseStarLevel;
@@ -94,12 +97,12 @@ public class TCourse implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacher_id", nullable = false)
-	public TTeacher getTTeacher() {
-		return this.TTeacher;
+	public TUser getTUser() {
+		return this.tUser;
 	}
 
-	public void setTTeacher(TTeacher TTeacher) {
-		this.TTeacher = TTeacher;
+	public void setTUser(TUser tUser) {
+		this.tUser = tUser;
 	}
 
 	@Column(name = "course_name", nullable = false, length = 100)
@@ -209,9 +212,23 @@ public class TCourse implements java.io.Serializable {
 	public void setTHomeworks(Set<THomework> THomeworks) {
 		this.THomeworks = THomeworks;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
+
+	@Column(name = "course_img", length = 300)
+	public String getCourseImg() {
+		return courseImg;
 	}
+
+	public void setCourseImg(String courseImg) {
+		this.courseImg = courseImg;
+	}
+
+	@Column(name = "student_num")
+	public int getStudentNum() {
+		return studentNum;
+	}
+
+	public void setStudentNum(int studentNum) {
+		this.studentNum = studentNum;
+	}
+	
 }

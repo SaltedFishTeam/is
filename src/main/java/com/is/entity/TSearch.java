@@ -86,9 +86,5 @@ public class TSearch implements java.io.Serializable {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }

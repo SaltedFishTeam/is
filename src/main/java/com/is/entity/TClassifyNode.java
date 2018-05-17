@@ -93,11 +93,7 @@ public class TClassifyNode implements java.io.Serializable {
 		this.TNodes = TNodes;
 	}
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 
 	
 	

@@ -123,9 +123,5 @@ public class TNode implements java.io.Serializable {
 	public void setSkimNum(Integer skimNum) {
 		this.skimNum = skimNum;
 	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return ToStringBuilder.reflectionToString(this);
-	}
+	
 }
