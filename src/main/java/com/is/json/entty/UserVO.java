@@ -23,6 +23,13 @@ public class UserVO {
 	private String style;
 	private String phone;
 	private String friends;
+	private String avatar;
+	public String getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
 	public String getFriends() {
 		return friends;
 	}

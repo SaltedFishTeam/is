@@ -3,13 +3,7 @@ package com.is.util;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import org.junit.Test;
-import org.springframework.http.codec.multipart.SynchronossPartHttpMessageReader;
-
 import com.is.entity.TUser;
-import com.is.json.entty.UserVO;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -68,14 +62,5 @@ public class PackageUtil {
 		return "get" + filedName.substring(0, 1).toUpperCase() + filedName.substring(1);
 	}
 	
-	@Test
-	public void Test() throws NoSuchFieldException, SecurityException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		TUser user = new TUser();
-		user.setUsername("吴丛明");
-		Class<? extends TUser> clazz = user.getClass();
-		Method method = clazz.getMethod("getUsername");
-		Object invoke = method.invoke(user);
-		
-	}
 	
 }

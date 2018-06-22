@@ -6,7 +6,7 @@ public class ApplyAddFriendVO extends WebSocketBaseVO {
 
 	private UserVO user;
 
-	public ApplyAddFriendVO(String uid, String fid, int type, String code, int mid) {
+	public ApplyAddFriendVO(Integer uid, Integer fid, int type, String code, int mid) {
 		super(uid, fid, type, code, mid);
 		// TODO Auto-generated constructor stub
 	}

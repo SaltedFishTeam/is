@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.is.entity.TUser;
+import com.is.json.entty.CourseUserVO;
 
 public interface UserRepository extends JpaRepository<TUser, Integer>{
 	

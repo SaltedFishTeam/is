@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "t_section", catalog = "is")
-public class TSection implements java.io.Serializable {
+public class TSection implements java.io.Serializable,Comparable<TSection> {
 
 	// Fields
 
@@ -30,8 +30,10 @@ public class TSection implements java.io.Serializable {
 	private TChapter TChapter;
 	private String sectionName;
 	private String sectionContent;
+	private Integer order;
+	private String fileName;
 	private Set<TCourseware> TCoursewares = new HashSet<TCourseware>(0);
-
+	private Set<TSectionMessage> sectionMessages = new HashSet<TSectionMessage>(0);
 	// Constructors
 
 	/** default constructor */
@@ -102,6 +104,40 @@ public class TSection implements java.io.Serializable {
 
 	public void setTCoursewares(Set<TCourseware> TCoursewares) {
 		this.TCoursewares = TCoursewares;
+	}
+
+	@Column(name = "sorder",nullable = false)
+	public Integer getOrder() {
+		return order;
+	}
+
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "section")
+	public Set<TSectionMessage> getSectionMessages() {
+		return sectionMessages;
+	}
+
+	public void setSectionMessages(Set<TSectionMessage> sectionMessages) {
+		this.sectionMessages = sectionMessages;
+	}
+	
+	@Column(name="file_name")
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	@Override
+	public int compareTo(TSection o) {
+		System.out.println("排序");
+		if(this.order > o.getOrder()) return 1;
+		else return -1;
 	}
 
 }

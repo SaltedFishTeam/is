@@ -1,6 +1,10 @@
 package com.is.entity;
 // default package
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -29,7 +34,14 @@ public class TNode implements java.io.Serializable {
 	private String content;
 	private Integer statNum;
 	private Integer skimNum;
-
+	private String nodeTagIds;
+	private String nodeTagNames;
+	private String filesUrl;
+	private String imgUrl;
+	private Integer flag;
+	private TUser TUser;
+	private String statIds;
+	private Set<TNodeMessage> TNodeMessages = new HashSet<TNodeMessage>(0);
 	// Constructors
 
 	/** default constructor */
@@ -60,7 +72,7 @@ public class TNode implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "node_id", unique = true, nullable = false)
+	@Column(name = "node_id", unique = true)
 	public Integer getNodeId() {
 		return this.nodeId;
 	}
@@ -70,7 +82,7 @@ public class TNode implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "classify_note_id", nullable = false)
+	@JoinColumn(name = "classify_note_id")
 	public TClassifyNode getTClassifyNode() {
 		return this.TClassifyNode;
 	}
@@ -106,7 +118,7 @@ public class TNode implements java.io.Serializable {
 		this.content = content;
 	}
 
-	@Column(name = "stat_num", nullable = false)
+	@Column(name = "stat_num")
 	public Integer getStatNum() {
 		return this.statNum;
 	}
@@ -115,7 +127,7 @@ public class TNode implements java.io.Serializable {
 		this.statNum = statNum;
 	}
 
-	@Column(name = "skim_num", nullable = false)
+	@Column(name = "skim_num")
 	public Integer getSkimNum() {
 		return this.skimNum;
 	}
@@ -123,5 +135,78 @@ public class TNode implements java.io.Serializable {
 	public void setSkimNum(Integer skimNum) {
 		this.skimNum = skimNum;
 	}
+
+	@Column(name = "node_tag_ids")
+	public String getNodeTagIds() {
+		return nodeTagIds;
+	}
+
+	public void setNodeTagIds(String nodeTagIds) {
+		this.nodeTagIds = nodeTagIds;
+	}
+	
+	@Column(name = "node_tag_names")
+	public String getNodeTagNames() {
+		return nodeTagNames;
+	}
+
+	public void setNodeTagNames(String nodeTagNames) {
+		this.nodeTagNames = nodeTagNames;
+	}
+
+	@Column(name = "files_url", nullable = true)
+	public String getFilesUrl() {
+		return filesUrl;
+	}
+
+	public void setFilesUrl(String fileUrls) {
+		this.filesUrl = fileUrls;
+	}
+
+	@Column(name = "img_url")
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	@Column(name = "flag")
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uid", nullable = false)
+	public TUser getTUser() {
+		return TUser;
+	}
+
+	public void setTUser(TUser tUser) {
+		this.TUser = tUser;
+	}
+	@Column(name = "stat_ids")
+	public String getStatIds() {
+		return statIds;
+	}
+
+	public void setStatIds(String statIds) {
+		this.statIds = statIds;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TNode")
+	public Set<TNodeMessage> getTNodeMessages() {
+		return TNodeMessages;
+	}
+
+	public void setTNodeMessages(Set<TNodeMessage> tNodeMessages) {
+		TNodeMessages = tNodeMessages;
+	}
+	
 	
 }

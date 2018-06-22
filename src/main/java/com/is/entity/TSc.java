@@ -28,7 +28,8 @@ public class TSc implements java.io.Serializable {
 	private Float grade;
 	private Integer arriveTime;
 	private Integer speakTime;
-
+	private String finishStudy;
+	private Integer studyNum;
 	// Constructors
 
 	/** default constructor */
@@ -114,6 +115,24 @@ public class TSc implements java.io.Serializable {
 
 	public void setSpeakTime(Integer speakTime) {
 		this.speakTime = speakTime;
+	}
+
+	@Column(name = "finish_study", nullable = false)
+	public String getFinishStudy() {
+		return finishStudy;
+	}
+
+	public void setFinishStudy(String finishStudy) {
+		this.finishStudy = finishStudy;
+	}
+
+	@Column(name = "study_num", nullable = false)
+	public Integer getStudyNum() {
+		return studyNum;
+	}
+
+	public void setStudyNum(Integer studyNum) {
+		this.studyNum = studyNum;
 	}
 	
 }

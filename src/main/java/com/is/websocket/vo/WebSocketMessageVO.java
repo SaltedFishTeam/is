@@ -1,6 +1,5 @@
 package com.is.websocket.vo;
 
-import org.springframework.web.socket.WebSocketMessage;
 
 public class WebSocketMessageVO extends WebSocketBaseVO {
 
@@ -14,7 +13,7 @@ public class WebSocketMessageVO extends WebSocketBaseVO {
 		this.message = message;
 	}
 
-	public WebSocketMessageVO(String uid, String fid, int type, String code, int mid) {
+	public WebSocketMessageVO(Integer uid, Integer fid, int type, String code, int mid) {
 		super(uid, fid, type, code, mid);
 		// TODO Auto-generated constructor stub
 	}

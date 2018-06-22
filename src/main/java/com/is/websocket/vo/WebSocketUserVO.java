@@ -19,7 +19,7 @@ public class WebSocketUserVO extends WebSocketBaseVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WebSocketUserVO(String uid, String fid, int type, String code, int mid) {
+	public WebSocketUserVO(Integer uid, Integer fid, int type, String code, int mid) {
 		super(uid, fid, type, code, mid);
 		// TODO Auto-generated constructor stub
 	}

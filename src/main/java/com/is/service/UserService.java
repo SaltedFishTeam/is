@@ -1,14 +1,19 @@
 package com.is.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Service;
 
+import com.is.entity.TCourse;
 import com.is.entity.TMessage;
 import com.is.entity.TUser;
+import com.is.json.entty.CourseUserVO;
 import com.is.json.entty.UserVO;
 import com.is.repository.MessageRepository;
 import com.is.repository.UserRepository;
@@ -80,6 +85,7 @@ public class UserService {
 	public TUser save(TUser user) {
 		TUser u = null;
 		try {
+			user.setFriends("");
 			u = userRepository.save(user);
 		} catch(Exception e) {
 			log.error("注册账号报错" + e.getMessage());
@@ -100,7 +106,6 @@ public class UserService {
 				list.add(userVO);
 			} catch(Exception e) {
 				log.error("批量查询好友失败" + e.getMessage());
-				throw new Exception("批量查询好友失败");
 			}
 		}
 		return list;
@@ -113,11 +118,16 @@ public class UserService {
 	 * @param user
 	 * @return
 	 */
-	public boolean delFriend(String fid,TUser user) {
-		String replace = user.getFriends().replace(fid, "").replace("::", "");
-		user.setFriends(replace);
+	public boolean delFriend(Integer fid,Integer uid) {
+		TUser friend = userRepository.findById(fid).get();
+		TUser user = userRepository.findById(uid).get();
+		String userReplace = user.getFriends().replace(String.valueOf(fid), "").replace("::", "");
+		user.setFriends(userReplace);
+		String friendReplace = friend.getFriends().replace(String.valueOf(uid), "").replace("::", "");
+		friend.setFriends(friendReplace);
 		try {
 			save(user);
+			save(friend);
 		}catch(Exception e) {
 			log.error("删除好友失败" + e.getMessage());
 			return false;
@@ -148,7 +158,30 @@ public class UserService {
 			return message;
 		}
 		return message;
+	}
 	
+	public PagedListHolder<CourseUserVO> teacherCourseList(int uid) {
+		TUser user = userRepository.getOne(uid);
+		Set<TCourse> courses = user.getTCourses();
+		List<CourseUserVO> list = new ArrayList<>();
 		
+		for(TCourse course : courses) {
+			CourseUserVO vo = new CourseUserVO();
+			vo.setCid(course.getCourseId());
+			vo.setCourseName(course.getCourseName());
+			vo.setAvatar(course.getCourseImg());
+			vo.setStudyNum(course.getTScs().size());
+			vo.setType(course.getCourseType());
+			list.add(vo);
+		}
+		Collections.sort(list);
+		PagedListHolder<CourseUserVO> pages = new PagedListHolder<>(list);
+		return pages;
+	}
+	
+	public void saveAvatar(int uid,String avatar) {
+		TUser tUser = userRepository.findById(uid).get();
+		tUser.setAvatar(avatar);
+		userRepository.save(tUser);
 	}
 }

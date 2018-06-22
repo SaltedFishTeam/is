@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.is.entity.TMessage;
 import com.is.entity.TUser;
 import com.is.json.entty.MessageVO;
@@ -15,6 +16,7 @@ import com.is.json.entty.UserVO;
 import com.is.repository.MessageRepository;
 import com.is.repository.UserRepository;
 import com.is.util.PackageUtil;
+import com.is.websocket.vo.WebSocketMessageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -73,21 +75,62 @@ public class MessageService {
 		for(TUser sender : senders) {
 			UserMessagesVO vo = new UserMessagesVO();
 			List<TMessage> list = message.findByReceiveId(receiver, sender);
-			List<MessageVO> msgs = new ArrayList<MessageVO>();
 			UserVO userVO = new UserVO();
-			PackageUtil.packageObject(userVO, sender);
+			userVO.setUsername(sender.getUsername());
+			userVO.setUid(sender.getUid());
+			userVO.setAvatar(sender.getAvatar());
 			vo.setUser(userVO);
-			vo.setMessages(msgs);
-			for(TMessage msg : list) {
-				MessageVO message = new MessageVO();
-				PackageUtil.packageObject(message, msg);
-				message.setReceiveId(msg.getTUserByReceiveId().getUid());
-				message.setSendId(msg.getTUserBySendId().getUid());
-				msgs.add(message);
-				vo.setType(msg.getType());
-			}
+			vo.setCount(list.size());
+			MessageVO msgVO = new MessageVO();
+			PackageUtil.packageObject(msgVO, list.get(0));
+			vo.setLastMessage(msgVO);
+			vo.setType(msgVO.getType());
 			vos.add(vo);
 		}
 		return vos;
+	}
+	
+	
+	public void saveChat(JSONObject json,boolean status) {
+		TMessage msg = new TMessage();
+		Optional<TUser> sender = user.findById(json.getInteger("sendId"));
+		Optional<TUser> receiver = user.findById(json.getInteger("receiveId"));
+		msg.setTUserBySendId(sender.get());
+		msg.setTUserByReceiveId(receiver.get());
+		msg.setMessage(json.getString("message"));
+		msg.setType(2);
+		msg.setStatus(status);
+		message.save(msg);
+	}
+	
+	public void saveChat(WebSocketMessageVO vo,boolean status) {
+		TMessage msg = new TMessage();
+		Optional<TUser> sender = user.findById(Integer.valueOf(vo.getUid()));
+		Optional<TUser> receiver = user.findById(Integer.valueOf(vo.getFid()));
+		msg.setTUserByReceiveId(receiver.get());
+		msg.setTUserBySendId(sender.get());
+		msg.setMessage(vo.getMessage());
+		msg.setType(6);
+		msg.setStatus(status);
+		message.save(msg);
+	}
+	
+	public List<TMessage> listChat(int uid,int fid) {
+		List<TMessage> list = null;
+		if(uid == 0 || fid == 0) {
+			list = message.findSystemChatMessage(uid, fid);
+		} else {
+			list = message.findChatMessage(uid, fid);
+		}
+		return list;
+	}
+	
+	public void readMsg(int sendId,int receiveId) {
+		message.updateUnDoMsg(sendId, receiveId);
+	}
+
+	
+	public void delMsg(int mid) {
+		message.delete(message.getOne(mid));
 	}
 }

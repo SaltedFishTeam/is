@@ -8,6 +8,7 @@ public class FindFriendStatus extends Status {
 	private String intro;
 	private String addr;
 	private Integer role;
+	private String avatar;
 	
 	public String getAddr() {
 		return addr;
@@ -55,6 +56,14 @@ public class FindFriendStatus extends Status {
 
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public FindFriendStatus(String status, int code, String msg) {

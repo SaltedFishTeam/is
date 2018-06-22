@@ -2,10 +2,13 @@ package com.is.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
+import javax.jms.Session;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Path;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
@@ -136,6 +139,7 @@ public class UserController {
 			//md5加密
 			String pwd = DigestUtils.md5DigestAsHex(user.getPwd().getBytes());
 			user.setPwd(pwd);
+			user.setFriends("");
 			TUser u = userService.save(user);
 			if(u == null) {
 				status = new RegisterStatus("fail", -1, "注册失败,系统保存信息失败。");
@@ -229,7 +233,7 @@ public class UserController {
 		
 		FindFriendStatus status = null;
 		if(friend != null) {
-			if(me.getFriends().contains(":"+friend.getUid()+":")) {
+			if(friend.getFriends().contains(":"+me.getUid()+":")) {
 				status = new FindFriendStatus("success", 2, "查找成功");
 				PackageUtil.packageObject(status, friend);
 			}
@@ -279,21 +283,21 @@ public class UserController {
 		TMessage save = message.save(msg, user.getUid(), fid);
 		if(save == null) {
 			status = new Status("success",1,"请不要重复添加好友噢！");
-		} else if(SocketServer.sessionPool.get(fid.toString()) == null) {
+		} else if(SocketServer.sessionPool.get(fid) == null) {
 			status = new Status("success",1,"好友不在线，请稍等");
 		} else {
 			
 			//执行到这里
 			//可以将消息转发给好友
 			//为了实时性使用WebSocket转发
-			ApplyAddFriendVO vo = new ApplyAddFriendVO(user.getUid().toString()
-					, fid.toString(),WebSocketProtocol.APPLY_ADD_FRIEND , "1",save.getMessageId());		
+			ApplyAddFriendVO vo = new ApplyAddFriendVO(user.getUid()
+					, fid,WebSocketProtocol.APPLY_ADD_FRIEND , "1",save.getMessageId());		
 			//将申请人的信息加入
 			//发给被申请人审核
 			UserVO userVO = new UserVO();
 			PackageUtil.packageObject(userVO, user);
 			vo.setUser(userVO);
-			SocketServer.sendMsg(String.valueOf(fid), JSON.toJSONString(vo));
+			SocketServer.sendMsg(fid, JSON.toJSONString(vo));
 			status = new Status("success",1,"好友添加请求发送成功");			
 		}
 		return status;
@@ -323,6 +327,8 @@ public class UserController {
 //			System.out.println(split.length);
 			try {
 				List<UserVO> list = userService.batchList(friends.split(":"));
+				System.out.println("好友列表");
+				System.out.println(list.size());
 				status = new LoadFriendsStatus("success", 1, "批量查询成功");
 				status.setFriends(list);
 			} catch (Exception e) {
@@ -342,9 +348,9 @@ public class UserController {
 	 */
 	@RequestMapping(value="/user/del/{fid}",method=RequestMethod.GET)
 	public @ResponseBody Status delFriend(HttpSession session,
-			@PathVariable("fid") String fid) {
+			@PathVariable("fid") Integer fid) {
 		TUser user = (TUser) session.getAttribute("user");
-		boolean flag = userService.delFriend(fid, user);
+		boolean flag = userService.delFriend(fid, user.getUid());
 		if(flag) {
 			return new Status("success",1,"删除好友成功");
 		} else {
@@ -364,9 +370,9 @@ public class UserController {
 				sender.setType(3);
 				WebSocketBaseVO receiver = new WebSocketBaseVO();
 				receiver.setType(3);
-				SocketServer.sendMsg(String.valueOf(result.getTUserByReceiveId().getUid())
+				SocketServer.sendMsg(result.getTUserByReceiveId().getUid()
 						, JSONObject.toJSONString(sender));
-				SocketServer.sendMsg(String.valueOf(result.getTUserBySendId().getUid())
+				SocketServer.sendMsg(result.getTUserBySendId().getUid()
 						, JSONObject.toJSONString(receiver));
 				return new Status("success",1,"添加好友成功");
 			}
@@ -375,5 +381,34 @@ public class UserController {
 		return new Status("fail",-1,"添加好友失败");
 	}
 	
+	@RequestMapping(value="/user/avatar",method = RequestMethod.POST)
+	public @ResponseBody Status updateAvatar(HttpSession session,
+			@RequestBody TUser avatar) {
+		System.out.println(avatar.getAvatar());
+		try {
+			TUser user = (TUser) session.getAttribute("user");
+			userService.saveAvatar(user.getUid(), avatar.getAvatar());
+		}catch (Exception e) {
+			return new Status("fail", -1, ExceptionUtils.getFullStackTrace(e));
+		}
+		return new Status("success", 1,"成功");
+	}
+	
+	@RequestMapping(value="/user/exit",method=RequestMethod.GET)
+	public @ResponseBody Status exit(HttpSession session) {
+		session.setAttribute("user", null);
+		return new Status("success", 1, "成功");
+	}
+	
+	@RequestMapping(value="/user/refuse",method=RequestMethod.POST)
+	public @ResponseBody Status refuse(@RequestBody Map<String,Object> params) {
+		Integer mid = (Integer) params.get("mid");
+		if(mid != null) {
+			message.delMsg(mid);
+			return new Status("success", 1, "成功");
+		} else {
+			return new Status("fail", -1, "失败");
+		}
+	}
 
 }

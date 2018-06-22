@@ -36,6 +36,7 @@ public class TUser {
 	private String addr;
 	private String sex;
 	private String style;
+	private String avatar;
 	private Set<TMessage> TMessagesForSendId = new HashSet<TMessage>(0);
 	private Set<TTopicreply> TTopicreplies = new HashSet<TTopicreply>(0);
 	private Set<TTopic> TTopics = new HashSet<TTopic>(0);
@@ -55,8 +56,10 @@ public class TUser {
 	private Set<TAction> TActions = new HashSet<TAction>(0);
 	private Set<TCoursecomment> TCoursecomments = new HashSet<TCoursecomment>(0);
 	private Set<TCourse> TCourses = new HashSet<TCourse>(0);
-
-
+	private Set<NoteReply> noteReply = new HashSet<NoteReply>(0);
+	private Set<TSectionMessage> sectionMessages = new HashSet<TSectionMessage>(0);
+	private Set<TSectionReply> sectionReplys = new HashSet<TSectionReply>(0);
+	private Set<TSectionReply> sectionReplysByRid = new HashSet<TSectionReply>(0);
 	// Constructors
 
 	/** default constructor */
@@ -400,5 +403,51 @@ public class TUser {
 	public void setTCoursecomments(Set<TCoursecomment> TCoursecomments) {
 		this.TCoursecomments = TCoursecomments;
 	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TUser")
+	public Set<NoteReply> getNoteReply() {
+		return noteReply;
+	}
+
+	public void setNoteReply(Set<NoteReply> noteReply) {
+		this.noteReply = noteReply;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<TSectionMessage> getSectionMessages() {
+		return sectionMessages;
+	}
+
+	public void setSectionMessages(Set<TSectionMessage> sectionMessages) {
+		this.sectionMessages = sectionMessages;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<TSectionReply> getSectionReplys() {
+		return sectionReplys;
+	}
+
+	public void setSectionReplys(Set<TSectionReply> sectionReplys) {
+		this.sectionReplys = sectionReplys;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "reply")
+	public Set<TSectionReply> getSectionReplysByRid() {
+		return sectionReplysByRid;
+	}
+
+	public void setSectionReplysByRid(Set<TSectionReply> sectionReplysByRid) {
+		this.sectionReplysByRid = sectionReplysByRid;
+	}
+
+	@Column(name="avatar")
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
 	
 }

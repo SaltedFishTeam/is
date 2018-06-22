@@ -63,9 +63,9 @@
        
 		<!-- 为了监控数据库 -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.25</version>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid-spring-boot-starter</artifactId>
+		    <version>1.1.9</version>
 		</dependency>
 		 <!-- 重构bean的toString -->
         <dependency>
@@ -116,17 +116,21 @@
         	<version>7.0</version>
             <scope>provided</scope>
         </dependency>
-		<dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
+		<dependency>  
+		    <groupId>org.springframework.boot</groupId>  
+		    <artifactId>spring-boot-starter-websocket</artifactId>  
+		</dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.47</version>
 		</dependency>
-		        
+		<dependency>
+		    <groupId>com.youbenzi</groupId>
+		    <artifactId>MDTool</artifactId>
+		    <version>1.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

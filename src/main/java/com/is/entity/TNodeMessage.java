@@ -1,6 +1,10 @@
 package com.is.entity;
 // default package
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -26,11 +31,33 @@ public class TNodeMessage implements java.io.Serializable {
 	private TUser TUser;
 	private String time;
 	private String content;
-
+	private TNode TNode;
+	private Set<NoteReply> noteReplys = new HashSet<NoteReply>(0);
 	// Constructors
+
+	
 
 	/** default constructor */
 	public TNodeMessage() {
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "TNodeMessage")
+	public Set<NoteReply> getNoteReplys() {
+		return noteReplys;
+	}
+
+	public void setNoteReplys(Set<NoteReply> noteReplys) {
+		this.noteReplys = noteReplys;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nid", nullable = false)
+	public TNode getTNode() {
+		return TNode;
+	}
+
+	public void setTNode(TNode tNode) {
+		TNode = tNode;
 	}
 
 	/** minimal constructor */

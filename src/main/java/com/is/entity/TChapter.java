@@ -22,7 +22,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "t_chapter", catalog = "is")
-public class TChapter implements java.io.Serializable {
+public class TChapter implements java.io.Serializable,Comparable<TChapter> {
 
 	// Fields
 
@@ -30,6 +30,7 @@ public class TChapter implements java.io.Serializable {
 	private TCourse TCourse;
 	private String chapterName;
 	private String chapterIntro;
+	private Integer order;
 	private Set<TSection> TSections = new HashSet<TSection>(0);
 
 	// Constructors
@@ -101,5 +102,24 @@ public class TChapter implements java.io.Serializable {
 
 	public void setTSections(Set<TSection> TSections) {
 		this.TSections = TSections;
+	}
+
+	@Column(name = "corder",nullable = false)
+	public Integer getOrder() {
+		return order;
+	}
+
+	public void setOrder(Integer order) {
+		this.order = order;
+	}
+	
+	@Override
+	public int compareTo(TChapter c) {
+		//自定义比较方法，如果认为此实体本身大则返回1，否则返回-1
+		System.out.println("排序");
+		if(this.order >= c.getOrder()) {
+			return 1;
+		}
+		return -1;
 	}
 }

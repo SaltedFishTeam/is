@@ -9,24 +9,30 @@ public class CourseVO {
 	private String courseIntro;
 	private Float courseStarLevel;
 	private Float courseDiffLevel;
-	private String[] courseLabels;
+	private String courseLabel;
 	private String courseType;
 	private String courseLive;
-	private Boolean courseStatus;
+	private Integer courseStatus;
 	private String courseImg;
 	private int studentNum;
-	private List<ChapterVO> chapters;
-	public List<ChapterVO> getChapters() {
-		return chapters;
+	private List<ChapterVO> tchapters;
+	
+	public CourseVO(Integer courseId, String courseName, String courseIntro, Float courseStarLevel,
+			Float courseDiffLevel, String courseLabel, String courseType, String courseLive, Integer courseStatus
+			,int studentNum) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.courseIntro = courseIntro;
+		this.courseStarLevel = courseStarLevel;
+		this.courseDiffLevel = courseDiffLevel;
+		this.courseLabel = courseLabel;
+		this.courseType = courseType;
+		this.courseLive = courseLive;
+		this.courseStatus = courseStatus;
+		this.studentNum = studentNum;
 	}
-	public void setChapters(List<ChapterVO> chapters) {
-		this.chapters = chapters;
-	}
-	public String getCourseImg() {
-		return courseImg;
-	}
-	public void setCourseImg(String courseImg) {
-		this.courseImg = courseImg;
+	public CourseVO() {
 	}
 	public Integer getCourseId() {
 		return courseId;
@@ -58,11 +64,11 @@ public class CourseVO {
 	public void setCourseDiffLevel(Float courseDiffLevel) {
 		this.courseDiffLevel = courseDiffLevel;
 	}
-	public String[] getCourseLabels() {
-		return courseLabels;
+	public String getCourseLabel() {
+		return courseLabel;
 	}
-	public void setCourseLabels(String[] courseLabels) {
-		this.courseLabels = courseLabels;
+	public void setCourseLabel(String courseLabel) {
+		this.courseLabel = courseLabel;
 	}
 	public String getCourseType() {
 		return courseType;
@@ -76,11 +82,17 @@ public class CourseVO {
 	public void setCourseLive(String courseLive) {
 		this.courseLive = courseLive;
 	}
-	public Boolean getCourseStatus() {
+	public Integer getCourseStatus() {
 		return courseStatus;
 	}
-	public void setCourseStatus(Boolean courseStatus) {
+	public void setCourseStatus(Integer courseStatus) {
 		this.courseStatus = courseStatus;
+	}
+	public String getCourseImg() {
+		return courseImg;
+	}
+	public void setCourseImg(String courseImg) {
+		this.courseImg = courseImg;
 	}
 	public int getStudentNum() {
 		return studentNum;
@@ -88,24 +100,11 @@ public class CourseVO {
 	public void setStudentNum(int studentNum) {
 		this.studentNum = studentNum;
 	}
-	public CourseVO(Integer courseId, String courseName, String courseIntro, Float courseStarLevel,
-			Float courseDiffLevel, String[] courseLabels, String courseType, String courseLive, Boolean courseStatus
-			,int studentNum) {
-		super();
-		this.courseId = courseId;
-		this.courseName = courseName;
-		this.courseIntro = courseIntro;
-		this.courseStarLevel = courseStarLevel;
-		this.courseDiffLevel = courseDiffLevel;
-		this.courseLabels = courseLabels;
-		this.courseType = courseType;
-		this.courseLive = courseLive;
-		this.courseStatus = courseStatus;
-		this.studentNum = studentNum;
+	public List<ChapterVO> getChapters() {
+		return tchapters;
 	}
-	public CourseVO() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setChapters(List<ChapterVO> chapters) {
+		this.tchapters = chapters;
 	}
 	
 	

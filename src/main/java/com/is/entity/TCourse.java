@@ -35,14 +35,15 @@ public class TCourse implements java.io.Serializable {
 	private String courseLabel;
 	private String courseType;
 	private String courseLive;
-	private Boolean courseStatus;
+	private Integer courseStatus;
 	private String courseImg;
 	private int studentNum;
+	private Integer sectionNum;
 	private Set<TSc> TScs = new HashSet<TSc>(0);
 	private Set<TChapter> TChapters = new HashSet<TChapter>(0);
 	private Set<TCoursecomment> TCoursecomments = new HashSet<TCoursecomment>(0);
 	private Set<THomework> THomeworks = new HashSet<THomework>(0);
-
+	
 	// Constructors
 
 	/** default constructor */
@@ -51,7 +52,7 @@ public class TCourse implements java.io.Serializable {
 
 	/** minimal constructor */
 	public TCourse(Integer courseId, TUser tUser, String courseName,
-			Float courseStarLevel, Float courseDiffLevel, Boolean courseStatus,String courseImg) {
+			Float courseStarLevel, Float courseDiffLevel, Integer courseStatus,String courseImg) {
 		this.courseId = courseId;
 		this.tUser = tUser;
 		this.courseName = courseName;
@@ -65,7 +66,7 @@ public class TCourse implements java.io.Serializable {
 	public TCourse(Integer courseId, TUser tUser, String courseName,
 			String courseIntro, Float courseStarLevel, Float courseDiffLevel,
 			String courseLabel, String courseType, String courseLive,
-			Boolean courseStatus, Set<TSc> TScs, Set<TChapter> TChapters,
+			Integer courseStatus, Set<TSc> TScs, Set<TChapter> TChapters,
 			Set<TCoursecomment> TCoursecomments, Set<THomework> THomeworks) {
 		this.courseId = courseId;
 		this.tUser = tUser;
@@ -169,11 +170,11 @@ public class TCourse implements java.io.Serializable {
 	}
 
 	@Column(name = "course_status", nullable = false)
-	public Boolean getCourseStatus() {
+	public Integer getCourseStatus() {
 		return this.courseStatus;
 	}
 
-	public void setCourseStatus(Boolean courseStatus) {
+	public void setCourseStatus(Integer courseStatus) {
 		this.courseStatus = courseStatus;
 	}
 
@@ -229,6 +230,15 @@ public class TCourse implements java.io.Serializable {
 
 	public void setStudentNum(int studentNum) {
 		this.studentNum = studentNum;
+	}
+
+	@Column(name = "section_num",nullable=false)
+	public Integer getSectionNum() {
+		return sectionNum;
+	}
+
+	public void setSectionNum(Integer sectionNum) {
+		this.sectionNum = sectionNum;
 	}
 	
 }
